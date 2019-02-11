@@ -11,7 +11,9 @@ function getAndPrintHTMLChunks() {
 
     // called by https when the request is made
     function callback(response) {
-            console.log(response)
+            response.on('data', function(chunk){
+                console.log(chunk.toString());
+            })
         
     }
     https.request(requestOptions, callback).end();
