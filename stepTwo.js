@@ -11,17 +11,18 @@ function getAndPrintHTML() {
 
     // requires https object (built-in to the system)
     var https = require('https');
-    var fs = require('fs');
+    // var fs = require('fs');
 
     // called by https when the request is made
     function callback(response) {
+        var breaks = '';
         response.on('data', function (chunk) {
-            var breaks = '';
             breaks += (chunk.toString());
-            console.log(breaks);
         })
-    }
-
+        response.on('end', function(){
+            console.log(breaks);
+    });
+}
     // marks the end of the file
     https.request(requestOptions, callback).end();
 }
