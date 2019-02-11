@@ -7,13 +7,11 @@ function getAndPrintHTML() {
         path: '/http-examples/step2.html'
     };
     // creates a character limit to the incoming data
-    var buf = new ArrayBuffer(255);
+    // var buf = new ArrayBuffer(255);
 
     // requires https object (built-in to the system)
     var https = require('https');
     var fs = require('fs');
-
-    var results = '';
 
     // called by https when the request is made
     function callback(response) {
