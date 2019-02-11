@@ -1,5 +1,6 @@
+var https = require('https');
+
 function getAndPrintHTML(options) {
-    var https = require('https');
 
     var options = {};
     options.host = requestOptions.host;
