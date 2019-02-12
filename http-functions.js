@@ -4,20 +4,17 @@ module.exports = function getHTML(requestOptions, callback) {
   var options = {};
   options.host = requestOptions.host;
   options.path = requestOptions.path;
+  //   console.log(requestOptions);
 
-  function callback(response) {
-    var breaks = "";
-    response.on("data", function(chunk) {
-      breaks += chunk.toString();
-    });
-    response.on("end", function() {
-      printHTML(breaks);
-    });
-  }
-  // marks the end of the file
-  https.request(options, callback).end();
+  var buffer = "";
+  https
+    .request(options, function(response) {
+      response.on("data", function(chunk) {
+        buffer += chunk;
+      });
+      response.on("end", function() {
+        callback(buffer);
+      });
+    })
+    .end();
 };
-
-function printHTML(html) {
-  console.log(html);
-}
